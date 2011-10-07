@@ -1,0 +1,33 @@
+README for sigio.jar
+
+This README is rather short, becaus I assume you know what you are
+doing.
+
+sigio.jar is a small collection of utility classes that I have
+developed over the past couple of years while programming in Java.
+
+It presently contains four packages:
+
+com.sigio.io: Classes for input/output.  Presently has a couple of
+FilenameFilter subclasses that come in handy.
+
+com.sigio.js: Classes that I used to embed the Rhino JavaScript
+library in an application.
+
+com.sigio.sql: Two classes that have been useful when writing JDBC
+database applications.
+
+com.sigio.util: Meant to be a hodge podge of various utility classes,
+but currently contains classes for transforming some numeric values
+from one measurement sytem to another, such as Fahrenheit to
+Centrigrade.
+
+You can make a jar file containing the classes with the included
+Makefile.  Simply type make on the command line and you will soon have
+sigio.jar that you can add to your classpath to use in your
+applications.
+
+If you type make documentation, you will get the javadoc generated
+HTML documentation for the classes and packages in a doc/
+subdirectory.  You can set the DOC_DIR variable in the environment or
+on the command line to install the documentation elsewhere.
