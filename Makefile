@@ -29,13 +29,33 @@
 
 DOC_DIR ?= doc/
 
+SOURCES = src/com/sigio/io/FilenamePatternFilter.java \
+          src/com/sigio/io/FilenameExtensionFilter.java \
+          src/com/sigio/js/ScriptRunner.java \
+          src/com/sigio/js/scriptrunner/plugins/Plugin.java \
+          src/com/sigio/js/scriptrunner/plugins/package-info.java \
+          src/com/sigio/js/scriptrunner/plugins/LoggerPlugin.java \
+          src/com/sigio/sql/ResultSetTableModel.java \
+          src/com/sigio/sql/DbPropertiesFileFilter.java \
+          src/com/sigio/util/ValueTransformer.java \
+          src/com/sigio/util/YardToMeterValueTransformer.java \
+          src/com/sigio/util/FahrenheitToCentigradeValueTransformer.java \
+          src/com/sigio/util/NumberToDoubleValueTransformer.java \
+          src/com/sigio/util/InchToMillimeterValueTransformer.java
+
+DOC_SOURCES = $(SOURCES) \
+            src/com/sigio/io/package-info.java \
+            src/com/sigio/js/package-info.java \
+            src/com/sigio/sql/package-info.java \
+            src/com/sigio/util/package-info.java
+
 .PHONY: documentation compile jar cp-resources clean
 
 jar: compile cp-resources
 	jar cf sigio.jar com/
 
-compile:
-	find . -name '*.java' -exec javac -d ./ -sourcepath src/ {} \;
+compile: $(SOURCES)
+	javac -d ./ -sourcepath src/ $^
 
 cp-resources:
 	for file in $$(find src/ -name '*.properties'); \
@@ -44,9 +64,8 @@ cp-resources:
 		cp $$file $$tgt; \
 	done
 
-documentation:
-	javadoc -d $(DOC_DIR) -doctitle sigio.jar -windowtitle sigio.jar \
-		-sourcepath src/ -subpackages com
+documentation: $(DOC_SOURCES)
+	javadoc -d $(DOC_DIR) -doctitle sigio.jar -windowtitle sigio.jar $^
 
 clean:
 	-rm -rf doc/
