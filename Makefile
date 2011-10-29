@@ -41,13 +41,17 @@ SOURCES = src/com/sigio/io/FilenamePatternFilter.java \
           src/com/sigio/util/YardToMeterValueTransformer.java \
           src/com/sigio/util/FahrenheitToCentigradeValueTransformer.java \
           src/com/sigio/util/NumberToDoubleValueTransformer.java \
-          src/com/sigio/util/InchToMillimeterValueTransformer.java
+          src/com/sigio/util/InchToMillimeterValueTransformer.java \
+          src/com/sigio/games/dice/Die.java \
+          src/com/sigio/games/dice/DoublingDie.java
 
 DOC_SOURCES = $(SOURCES) \
             src/com/sigio/io/package-info.java \
             src/com/sigio/js/package-info.java \
             src/com/sigio/sql/package-info.java \
-            src/com/sigio/util/package-info.java
+            src/com/sigio/util/package-info.java \
+            src/com/sigio/games/package-info.java \
+            src/com/sigio/games/dice/package-info.java
 
 .PHONY: documentation compile jar cp-resources clean
 
