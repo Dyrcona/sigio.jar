@@ -33,7 +33,6 @@ SOURCES = src/com/sigio/io/FilenamePatternFilter.java \
           src/com/sigio/io/FilenameExtensionFilter.java \
           src/com/sigio/js/ScriptRunner.java \
           src/com/sigio/js/scriptrunner/plugins/Plugin.java \
-          src/com/sigio/js/scriptrunner/plugins/package-info.java \
           src/com/sigio/js/scriptrunner/plugins/LoggerPlugin.java \
           src/com/sigio/sql/ResultSetTableModel.java \
           src/com/sigio/sql/DbPropertiesFileFilter.java \
@@ -46,12 +45,13 @@ SOURCES = src/com/sigio/io/FilenamePatternFilter.java \
           src/com/sigio/games/dice/DoublingDie.java
 
 DOC_SOURCES = $(SOURCES) \
-            src/com/sigio/io/package-info.java \
-            src/com/sigio/js/package-info.java \
-            src/com/sigio/sql/package-info.java \
-            src/com/sigio/util/package-info.java \
-            src/com/sigio/games/package-info.java \
-            src/com/sigio/games/dice/package-info.java
+          src/com/sigio/io/package-info.java \
+          src/com/sigio/js/package-info.java \
+          src/com/sigio/js/scriptrunner/plugins/package-info.java \
+          src/com/sigio/sql/package-info.java \
+          src/com/sigio/util/package-info.java \
+          src/com/sigio/games/package-info.java \
+          src/com/sigio/games/dice/package-info.java
 
 .PHONY: documentation compile jar cp-resources clean
 
