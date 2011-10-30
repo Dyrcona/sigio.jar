@@ -6,7 +6,10 @@ doing.
 sigio.jar is a small collection of utility classes that I have
 developed over the past couple of years while programming in Java.
 
-It presently contains four packages:
+It presently contains five packages:
+
+com.sigio.games.dice: Classes to simulate dice for games or other
+purposes.
 
 com.sigio.io: Classes for input/output.  Presently has a couple of
 FilenameFilter subclasses that come in handy.
