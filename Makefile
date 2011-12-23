@@ -59,7 +59,7 @@ jar: compile cp-resources
 	jar cf sigio.jar com/
 
 compile: $(SOURCES)
-	javac -d ./ -sourcepath src/ $^
+	javac $(JAVAC_ARGS) -d ./ -sourcepath src/ $^
 
 cp-resources:
 	for file in $$(find src/ -name '*.properties'); \
