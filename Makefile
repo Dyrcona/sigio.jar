@@ -42,7 +42,16 @@ SOURCES = src/com/sigio/io/FilenamePatternFilter.java \
           src/com/sigio/util/NumberToDoubleValueTransformer.java \
           src/com/sigio/util/InchToMillimeterValueTransformer.java \
           src/com/sigio/games/dice/Die.java \
-          src/com/sigio/games/dice/DoublingDie.java
+          src/com/sigio/games/dice/DoublingDie.java \
+          src/com/sigio/json/JSONArray.java \
+          src/com/sigio/json/JSONException.java \
+          src/com/sigio/json/JSON.java \
+          src/com/sigio/json/JSONLiteral.java \
+          src/com/sigio/json/JSONObject.java \
+          src/com/sigio/json/JSONReader.java \
+          src/com/sigio/json/JSONStringAdapter.java \
+          src/com/sigio/json/JSONValue.java \
+          src/com/sigio/json/JSONWriter.java
 
 DOC_SOURCES = $(SOURCES) \
           src/com/sigio/io/package-info.java \
@@ -51,7 +60,8 @@ DOC_SOURCES = $(SOURCES) \
           src/com/sigio/sql/package-info.java \
           src/com/sigio/util/package-info.java \
           src/com/sigio/games/package-info.java \
-          src/com/sigio/games/dice/package-info.java
+          src/com/sigio/games/dice/package-info.java \
+          src/com/sigio/json/package-info.java
 
 .PHONY: documentation compile jar cp-resources clean
 
