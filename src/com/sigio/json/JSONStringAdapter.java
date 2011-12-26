@@ -85,4 +85,6 @@ public class JSONStringAdapter {
 		return string;
 	}
 
+	// Private constructor, because we don't ever need one.
+	private JSONStringAdapter() { super(); }
 }

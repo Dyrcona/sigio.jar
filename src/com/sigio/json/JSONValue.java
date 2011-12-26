@@ -63,7 +63,9 @@ public enum JSONValue {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns a string representation of the object.
+	 *
+	 * @return The name of class of the specific enum value
 	 */
 	@Override
 	public String toString() {

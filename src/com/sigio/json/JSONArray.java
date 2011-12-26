@@ -59,57 +59,100 @@ public class JSONArray extends ArrayList<Object> {
 			throw new ClassCastException(o.getClass().getName() + " is not a valid JSON value");
 	}
 	/**
-	 * {@inheritDoc}
+	 * Appends the specified element to the end of this list. 
+	 *
+	 * @param o element to be appended to this list
+	 * @return {@code true} (as specified by {@code Collection.add(E)})
 	 * @throws ClassCastException if the passed in Object is not a
 	 * suitable JSON object
 	 */
 	@Override
-	public boolean add(Object o) {
+	public boolean add(Object o) throws ClassCastException {
 		this.checkInstance(o);
 		return super.add(o);
 	}
 	/**
-	 * {@inheritDoc}
+	 * Inserts the specified element at the specified position in this
+	 * list. Shifts the element currently at that position (if any)
+	 * and any subsequent elements to the right (adds one to their
+	 * indices).
+	 *
+	 * @param idx element to be inserted
+	 * @param o element to be inserted
+	 * @throws IndexOutOfBoundsException if the index is out of range
+	 * {@code (index < 0 || index > size())}
 	 * @throws ClassCastException if the passed in Object is not a
 	 * suitable JSON object
 	 */
 	@Override
-	public void add(int idx, Object o) {
+	public void add(int idx, Object o) throws IndexOutOfBoundsException, ClassCastException {
 		this.checkInstance(o);
 		super.add(idx, o);
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Appends all of the elements in the specified collection to the
+	 * end of this list, in the order that they are returned by the
+	 * specified collection's Iterator. The behavior of this operation
+	 * is undefined if the specified collection is modified while the
+	 * operation is in progress. (This implies that the behavior of
+	 * this call is undefined if the specified collection is this
+	 * list, and this list is nonempty.)
+	 * 
+	 * @param collection collection containing elements to be added to
+	 * this list
+	 * @return {@code true} if the list changed as a result of the call
+	 * @throws NullPointerException If the collection is {@code null}
 	 * @throws ClassCastException if the passed in Object is not a
 	 * suitable JSON object
 	 */
 	@Override
-	public boolean addAll(Collection<? extends Object> collection) {
+	public boolean addAll(Collection<? extends Object> collection) throws ClassCastException {
 		for (Object o : collection)
 			this.checkInstance(o);
 		return super.addAll(collection);
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Inserts all of the elements in the specified collection into
+	 * this list, starting at the specified position. Shifts the
+	 * element currently at that position (if any) and any subsequent
+	 * elements to the right (increases their indices). The new
+	 * elements will appear in the list in the order that they are
+	 * returned by the specified collection's iterator.
+	 *
+	 * @param idx index at which to insert the first element from the
+	 * specified collection
+	 * @param collection collection containing elements to be added to
+	 * this list
+	 * @return {@code true} if the list changed as a result of the call
+	 * @throws IndexOutOfBoundsException if the index is out of range
+	 * {@code (index < 0 || index > size())}
+	 * @throws NullPointerException If the collection is {@code null}
 	 * @throws ClassCastException if any of the members of the
 	 * collection is not a suitable JSON object
 	 */
 	@Override
-	public boolean addAll(int idx, Collection<? extends Object> collection) {
+	public boolean addAll(int idx, Collection<? extends Object> collection) throws IndexOutOfBoundsException, ClassCastException {
 		for (Object o : collection)
 			this.checkInstance(o);
 		return super.addAll(idx, collection);
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Replaces the element at the specified position in this list
+	 * with the specified element.
+	 *
+	 * @param idx index of the element to replace
+	 * @param o element to be stored at the specified position
+	 * @return the element previously at the specified position
+	 * @throws IndexOutOfBoundsException if the index is out of range
+	 * {@code (index < 0 || index >= size())}
 	 * @throws ClassCastException if any members of the collection is
 	 * not a suitable JSON object
 	 */
 	@Override
-	public Object set(int idx, Object o) {
+		public Object set(int idx, Object o) throws IndexOutOfBoundsException, ClassCastException {
 		this.checkInstance(o);
 		return super.set(idx, o);
 	}

@@ -37,10 +37,31 @@ public class JSONWriter extends FilterWriter {
 	}
 
 	/**
-	 * Write a java object as a JSON value string.
+	 * Write a java object as a JSON value string.  Classes are
+	 * written as follows:
+	 * 
+	 * <ul>
+	 * <li>JSONLiteral, null, and Boolean are written as literal
+	 * strings.</li>
 	 *
-	 * @param o object to write
-	 * @throws IOException if a write error occurs
+	 * <li>Instances of java.util.Map, including JSONObject, are
+	 * written as JSON objects.</li>
+	 *
+	 * <li>Instances of java.util.Collection, including JSONArray, are
+	 * written as JSON arrays.</li>
+	 *
+	 * <li>Instances of Number are written as JSON numbers
+	 * (i.e. literal string representation of the numeric value).</li>
+	 *
+	 * <li>Instances of String are written as JSON strings.</li>
+	 *
+	 * <li>All other classes have their toString() method called and
+	 * the result is written as a JSON string.</li>
+	 *
+	 * </ul>
+	 *
+	 * @param o Object to write
+	 * @throws IOException If an I/O error occurs
 	 */
 	public void write(Object o) throws IOException {
 		if (o == null) {
@@ -86,7 +107,10 @@ public class JSONWriter extends FilterWriter {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Writes a string as a JSON string.
+	 *
+	 * @param str String to write
+	 * @throws IOException If an I/O error occurs
 	 */
 	@Override
 	public void write(String str) throws IOException {
@@ -94,7 +118,14 @@ public class JSONWriter extends FilterWriter {
 		super.out.write(out);
 	}
 	/**
-	 * {@inheritDoc}
+	 * Writes a portion of a string as a JSON string.
+	 *
+	 * @param str String to be written
+	 * @param off Offset from which to start reading characters
+	 * @param len Number of characters to write
+	 * @throws IOException If an I/O error occurs
+	 * @throws IndexOutOfBoundsException If {@code off} or {@code len}
+	 * are negative or if {@code off + len} exceed the length of str
 	 */
 	@Override
 	public void write(String str, int off, int len) throws IOException, IndexOutOfBoundsException {

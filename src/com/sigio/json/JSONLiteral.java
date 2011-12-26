@@ -55,7 +55,9 @@ public enum JSONLiteral {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns a string representation of the object.
+	 *
+	 * @return String of the literal JSON value
 	 */
 	@Override
 	public String toString() {

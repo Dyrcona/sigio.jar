@@ -86,4 +86,8 @@ public class JSON {
 		return str.matches("-?[0-9]+(?:\\.[0-9]+)?(?:[eE][-+]?[0-9]+)?");
 	}
 
+	// Private constructor, so we don't see it in javadoc and so we
+	// don't accidentally try to instantiate one.
+	private JSON() { super(); }
+
 }

@@ -69,23 +69,34 @@ public class JSONObject extends HashMap<String,Object> {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Associates the specified value with the specified key in this
+	 * object.
+	 *
+	 * @param key JSON object field name with which the specified
+	 * value is to be associated
+	 * @param value value for the JSON field
+	 * @return the previous value associated with {@code key}, or
+	 * {@code null} if there was no mapping for {@code key}.
+	 * @throws NullPointerException if the {@code key} is null
 	 * @throws ClassCastException if the passed in value is not a
 	 * suitable JSON object
 	 */
 	@Override
-	public Object put(String key, Object value) {
+	public Object put(String key, Object value) throws ClassCastException {
 		this.checkInstance(value);
 		return super.put(key, value);
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Copies all of the mappings from the specified map to this map.
+	 *
+	 * @param map mappings to be stored in this map
+	 * @throws NullPointerException if the specified map is null or contains null keys
 	 * @throws ClassCastException if the passed in value is not a
 	 * suitable JSON object
 	 */
 	@Override
-	public void putAll(Map<? extends String, ? extends Object> map) {
+	public void putAll(Map<? extends String, ? extends Object> map) throws ClassCastException {
 		Set<? extends String> keys = map.keySet();
 		for (String key : keys)
 			this.checkInstance(map.get(key));

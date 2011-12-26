@@ -339,7 +339,11 @@ public class JSONReader extends PushbackReader {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Reads a single character.
+	 *
+	 * @return The character read, or -1 if the end of stream has been
+	 * reached.
+	 * @throws IOException If an I/O error occurs
 	 */
 	@Override
 	public int read() throws IOException {
@@ -349,7 +353,14 @@ public class JSONReader extends PushbackReader {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Reads characters into a portion of an array.
+	 *
+	 * @param buf Destination buffer
+	 * @param off Offset at which to start writing characters
+	 * @param len Maximum number of characters to read
+	 * @return The number of characters read, or -1 if the end of the
+	 * stream has been reached
+	 * @throws IOException If an I/O error occurs
 	 */
 	@Override
 	public int read(char buf[], int off, int len) throws IOException {
@@ -360,7 +371,13 @@ public class JSONReader extends PushbackReader {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Pushes back a single character by copying it to the front of
+	 * the pushback buffer. After this method returns, the next
+	 * character to be read will have the value {@code (char)c}.
+	 *
+	 * @param c The int value representing a character to be pushed back
+	 * @throws If the pushback buffer is full, or if some other I/O
+	 * error occurs
 	 */
 	@Override
 	public void unread(int c) throws IOException {
@@ -369,7 +386,17 @@ public class JSONReader extends PushbackReader {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Pushes back a portion of an array of characters by copying it
+	 * to the front of the pushback buffer. After this method returns,
+	 * the next character to be read will have the value {@code
+	 * cbuf[off]}, the character after that will have the value {@code
+	 * cbuf[off+1]}, and so forth.
+	 *
+	 * @param buf Character array to push back
+	 * @param off Offset of first character to push back
+	 * @param len Number of characters to push back
+	 * @throws IOException If there is insufficient room in the
+	 * pushback buffer, or if some other I/O error occurs
 	 */
 	@Override
 	public void unread(char buf[], int off, int len) throws IOException {
@@ -378,7 +405,15 @@ public class JSONReader extends PushbackReader {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Pushes back an array of characters by copying it to the front
+	 * of the pushback buffer. After this method returns, the next
+	 * character to be read will have the value {@code buf[0]}, the
+	 * character after that will have the value {@code buf[1]}, and so
+	 * forth.
+	 *
+	 * @param buf Character array to push back
+	 * @throws IOException If there is insufficient room in the
+	 * pushback buffer, or if some other I/O error occurs
 	 */
 	@Override
 	public void unread(char buf[]) throws IOException {
