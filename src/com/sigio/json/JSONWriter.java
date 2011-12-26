@@ -48,6 +48,12 @@ public class JSONWriter extends FilterWriter {
 		} else if (o instanceof JSONLiteral) {
 			JSONLiteral literal = (JSONLiteral) o;
 			super.out.write(literal.toString());
+		} else if (o instanceof Boolean) {
+			Boolean b = (Boolean) o;
+			if (b == Boolean.TRUE)
+				super.out.write(JSONLiteral.TRUE.toString());
+			else
+				super.out.write(JSONLiteral.FALSE.toString());
 		} else if (o instanceof java.util.Map) {
 			Map<?,?> map = (Map<?,?>) o;
 			int count = 0;
