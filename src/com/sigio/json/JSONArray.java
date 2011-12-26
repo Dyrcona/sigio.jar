@@ -55,6 +55,8 @@ public class JSONArray extends ArrayList<Object> {
 	 * suitable JSON object.
 	 */
 	private void checkInstance(Object o) {
+		if (o == null)
+			o = JSONLiteral.NULL;
 		if (!JSONValue.isInstance(o))
 			throw new ClassCastException(o.getClass().getName() + " is not a valid JSON value");
 	}

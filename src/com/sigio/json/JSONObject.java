@@ -64,6 +64,8 @@ public class JSONObject extends HashMap<String,Object> {
 	 * JSON value class.
 	 */
 	private void checkInstance(Object o) {
+		if (o == null)
+			o = JSONLiteral.NULL;
 		if (!JSONValue.isInstance(o))
 			throw new ClassCastException(o.getClass().getName() + " is not a valid JSON value");
 	}
@@ -83,6 +85,8 @@ public class JSONObject extends HashMap<String,Object> {
 	 */
 	@Override
 	public Object put(String key, Object value) throws ClassCastException {
+		if (key == null)
+			throw new NullPointerException();
 		this.checkInstance(value);
 		return super.put(key, value);
 	}
@@ -98,8 +102,11 @@ public class JSONObject extends HashMap<String,Object> {
 	@Override
 	public void putAll(Map<? extends String, ? extends Object> map) throws ClassCastException {
 		Set<? extends String> keys = map.keySet();
-		for (String key : keys)
+		for (String key : keys) {
+			if (key == null)
+				throw new NullPointerException();
 			this.checkInstance(map.get(key));
+		}
 		super.putAll(map);
 	}
 
