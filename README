@@ -1,12 +1,12 @@
 README for sigio.jar
 
-This README is rather short, becaus I assume you know what you are
+This README is rather short, because I assume you know what you are
 doing.
 
 sigio.jar is a small collection of utility classes that I have
 developed over the past couple of years while programming in Java.
 
-It presently contains five packages:
+It presently contains six packages:
 
 com.sigio.games.dice: Classes to simulate dice for games or other
 purposes.
@@ -16,6 +16,9 @@ FilenameFilter subclasses that come in handy.
 
 com.sigio.js: Classes that I used to embed the Rhino JavaScript
 library in an application.
+
+com.sigio.json: Classes to read and to write JSON format data as
+specified in RFC4627.
 
 com.sigio.sql: Two classes that have been useful when writing JDBC
 database applications.
