@@ -152,7 +152,7 @@ public class JSONArray extends ArrayList<Object> {
 	 * not a suitable JSON object
 	 */
 	@Override
-		public Object set(int idx, Object o) throws IndexOutOfBoundsException, ClassCastException {
+	public Object set(int idx, Object o) throws IndexOutOfBoundsException, ClassCastException {
 		this.checkInstance(o);
 		return super.set(idx, o);
 	}
