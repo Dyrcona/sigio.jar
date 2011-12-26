@@ -21,35 +21,70 @@ package com.sigio.json;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
+/**
+ * Class to implement a JSON object as defined in RFC4627.
+ */
 public class JSONObject extends HashMap<String,Object> {
 
+	/**
+	 * Construct an empty JSONObject with a default initial capacity
+	 * and load factor.
+	 */
 	public JSONObject() {
 		super();
 	}
 
+	/**
+	 * Construct a JSONObject with an initial capacity and default
+	 * load factor.
+	 *
+	 * @param initialCapacity initial capacity of the map
+	 */
 	public JSONObject(int initialCapacity) {
 		super(initialCapacity);
 	}
 
+	/**
+	 * Constructs a JSONObject with an initial capacity and load
+	 * factor.
+	 */
 	public JSONObject(int initialCapacity, float loadFactor) {
 		super(initialCapacity, loadFactor);
 	}
 
+	/**
+	 * Construct a JSONObject from an existing map of objects.
+	 */
 	public JSONObject(Map<? extends String, ? extends Object> map) {
 		super(map);
 	}
 	
+	/**
+	 * Private method to check if the passed in object is a suitable
+	 * JSON value class.
+	 */
 	private void checkInstance(Object o) {
 		if (!JSONValue.isInstance(o))
 			throw new ClassCastException(o.getClass().getName() + " is not a valid JSON value");
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @throws ClassCastException if the passed in value is not a
+	 * suitable JSON object
+	 */
+	@Override
 	public Object put(String key, Object value) {
 		this.checkInstance(value);
 		return super.put(key, value);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @throws ClassCastException if the passed in value is not a
+	 * suitable JSON object
+	 */
+	@Override
 	public void putAll(Map<? extends String, ? extends Object> map) {
 		Set<? extends String> keys = map.keySet();
 		for (String key : keys)

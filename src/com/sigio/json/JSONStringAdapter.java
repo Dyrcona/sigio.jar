@@ -22,13 +22,13 @@ import java.text.Normalizer;
 
 public class JSONStringAdapter {
 
-	private static char[] quote_seq = { '\\', JSON.QUOTE_CHAR };
-	private static char[] backspace_seq = { '\\', 'b' };
-	private static char[] tab_seq = { '\\', 't' };
-	private static char[] nl_seq = { '\\', 'n' };
-	private static char[] ff_seq = { '\\', 'f' };
-	private static char[] cr_seq = { '\\', 'r' };
-	private static char[] solidus_seq = { '\\', '/' };
+	private static char[] quote_seq = { JSON.ESCAPE_CHAR, JSON.QUOTE_CHAR };
+	private static char[] backspace_seq = { JSON.ESCAPE_CHAR, 'b' };
+	private static char[] tab_seq = { JSON.ESCAPE_CHAR, 't' };
+	private static char[] nl_seq = { JSON.ESCAPE_CHAR, 'n' };
+	private static char[] ff_seq = { JSON.ESCAPE_CHAR, 'f' };
+	private static char[] cr_seq = { JSON.ESCAPE_CHAR, 'r' };
+	private static char[] solidus_seq = { JSON.ESCAPE_CHAR, '/' };
 
 	/**
 	 * Converts content of a java.lang.String to a format suitable for
@@ -59,7 +59,7 @@ public class JSONStringAdapter {
 				sb.append(JSONStringAdapter.solidus_seq);
 				break;
 			case 0x005C:
-				sb.append('\\');
+				sb.append(JSON.ESCAPE_CHAR);
 				break;
 			case JSON.QUOTE_CHAR:
 				sb.append(JSONStringAdapter.quote_seq);
@@ -72,8 +72,8 @@ public class JSONStringAdapter {
 		}
 
 		// Surround the string with quotes:
-		sb.insert(0, '"');
-		sb.append('"');
+		sb.insert(0, JSON.QUOTE_CHAR);
+		sb.append(JSON.QUOTE_CHAR);
 
 		// Canonical Decomposition of Unicode (NFD).
 		String string = Normalizer.normalize(sb.toString(), Normalizer.Form.NFD);

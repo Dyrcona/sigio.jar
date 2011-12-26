@@ -24,13 +24,24 @@ import java.io.Writer;
 import java.util.Collection;
 import java.util.Map;
 
-
+/**
+ * Writer class to write certain java objects as JSON value strings.
+ */
 public class JSONWriter extends FilterWriter {
 
+	/**
+	 * Construct a new JSONWriter.
+	 */
 	public JSONWriter(Writer out) {
 		super(out);
 	}
 
+	/**
+	 * Write a java object as a JSON value string.
+	 *
+	 * @param o object to write
+	 * @throws IOException if a write error occurs
+	 */
 	public void write(Object o) throws IOException {
 		if (o == null) {
 			super.out.write(JSONLiteral.NULL.toString());
@@ -68,12 +79,17 @@ public class JSONWriter extends FilterWriter {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void write(String str) throws IOException {
 		String out = JSONStringAdapter.toJSONString(str);
 		super.out.write(out);
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void write(String str, int off, int len) throws IOException, IndexOutOfBoundsException {
 		this.write(str.substring(off, (off + len)));
