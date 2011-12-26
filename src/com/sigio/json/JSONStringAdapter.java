@@ -20,6 +20,10 @@ package com.sigio.json;
 
 import java.text.Normalizer;
 
+/**
+ * Class to output strings as valid JSON strings. It exists mainly for
+ * the static, to JSONString method.
+ */
 public class JSONStringAdapter {
 
 	private static char[] quote_seq = { JSON.ESCAPE_CHAR, JSON.QUOTE_CHAR };
