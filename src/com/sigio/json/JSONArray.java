@@ -20,6 +20,8 @@ package com.sigio.json;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.ResourceBundle;
+
 /**
  * Class to implement a JSON array as defined in RFC4627. We inherit
  * from ArrayList<Object> to take advantage of existing functionality.
@@ -54,11 +56,15 @@ public class JSONArray extends ArrayList<Object> {
 	 * Helper method to check if the parameter object's class is a
 	 * suitable JSON object.
 	 */
-	private void checkInstance(Object o) {
+	private void checkInstance(Object o) throws ClassCastException {
 		if (o == null)
 			o = JSONLiteral.NULL;
-		if (!JSONValue.isInstance(o))
-			throw new ClassCastException(o.getClass().getName() + " is not a valid JSON value");
+		if (!JSONValue.isInstance(o)) {
+			ResourceBundle bundle = com.sigio.json.BundleLoader.getBundle();
+			String format = bundle.getString("INVALID_VALUE");
+			String msg = String.format(format, o.getClass().getName());
+			throw new ClassCastException(msg);
+		}
 	}
 	/**
 	 * Appends the specified element to the end of this list. 

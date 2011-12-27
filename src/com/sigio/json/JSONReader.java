@@ -20,6 +20,7 @@ package com.sigio.json;
 import java.io.PushbackReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ResourceBundle;
 
 /**
  * Reader subclass to read JSON data and create JSON objects.
@@ -30,6 +31,8 @@ public class JSONReader extends PushbackReader {
 	 * A special Character constant to return if the reader hits EOF.
 	 */
 	public static final Character EOF = new Character((char)-1);
+
+	private ResourceBundle bundle = null;
 
 	/*
 	 * Internal state variables.
@@ -43,6 +46,7 @@ public class JSONReader extends PushbackReader {
 	 */
 	public JSONReader(Reader in) {
 		super(in);
+		bundle = com.sigio.json.BundleLoader.getBundle();
 	}
 
 	/**
@@ -50,6 +54,7 @@ public class JSONReader extends PushbackReader {
 	 */
 	public JSONReader(Reader in, int size) {
 		super(in, size);
+		bundle = com.sigio.json.BundleLoader.getBundle();
 	}
 
 	/**
@@ -98,7 +103,7 @@ public class JSONReader extends PushbackReader {
 			case -1:
 			case '\n':
 			case '\r':
-				throw this.syntaxException("Unterminated String");
+				throw this.syntaxException(this.bundle.getString("UNTERMINATED_STRING"));
 			case JSON.ESCAPE_CHAR:
 				c = this.read();
 				switch (c) {
@@ -124,12 +129,15 @@ public class JSONReader extends PushbackReader {
 					break;
 				case 'u':
 					char buf[] = new char[4];
-					if (this.read(buf, 0, 4) < 4)
-						throw this.syntaxException("Invalid unicode escape");
+					if (this.read(buf, 0, 4) < 4) {
+						String message = String.format(this.bundle.getString("INVALID_ESCAPE"), "\\u" + new String(buf));
+						throw this.syntaxException(message);
+					}
 					sb.append((char)Integer.parseInt(new String(buf), 16));
 					break;
 				default:
-					throw this.syntaxException("Invalid escape sequence \\" +(char)c);
+					String message = String.format(this.bundle.getString("INVALID_ESCAPE"), "\\" + (char)c);
+					throw this.syntaxException(message);
 				}
 				break;
 			default:
@@ -166,7 +174,8 @@ public class JSONReader extends PushbackReader {
 			case JSON.QUOTE_CHAR:
 			case JSON.ESCAPE_CHAR:
 			case JSON.NAME_SEPARATOR:
-				throw this.syntaxException("Illegal character " + (char) c);
+				String message = String.format(this.bundle.getString("ILLEGAL_CHARACTER"), (char) c);
+				throw this.syntaxException(message);
 			case JSON.VALUE_SEPARATOR:
 			case JSON.END_ARRAY:
 			case JSON.END_OBJECT:
@@ -236,8 +245,10 @@ public class JSONReader extends PushbackReader {
 				this.unread(c);
 			return obj;
 		}
-		else
-			throw this.syntaxException("Illegal character " + (char) c);
+		else {
+			String message = String.format(this.bundle.getString("ILLEGAL_CHARACTER"), (char)c);
+			throw this.syntaxException(message);
+		}
 	}
 
 	/**
@@ -298,8 +309,10 @@ public class JSONReader extends PushbackReader {
 		c = this.skipWSRead();
 		if (c == JSON.NAME_SEPARATOR)
 			return name;
-		else
-			throw this.syntaxException("Illegal character " + (char) c);
+		else {
+			String message = String.format(this.bundle.getString("ILLEGAL_CHARACTER"), (char)c);
+			throw this.syntaxException(message);
+		}
 	}
 
 	/**
@@ -320,8 +333,10 @@ public class JSONReader extends PushbackReader {
 				this.unread(c);
 			return value;
 		}
-		else
-			throw this.syntaxException("Illegal character " + (char) c);
+		else {
+			String message = String.format(this.bundle.getString("ILLEGAL_CHARACTER"), (char)c);
+			throw this.syntaxException(message);
+		}
 	}
 
 	/**

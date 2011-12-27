@@ -17,6 +17,9 @@
  * along with sigio.jar.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.sigio.json;
+
+import java.util.ResourceBundle;
+
 /**
  * Enum for the allowed JSON literals as defined in RFC4627.
  */
@@ -90,7 +93,8 @@ public enum JSONLiteral {
 			if (l.equals(str))
 				return l;
 		}
-		throw new JSONException(str + " is not a JSON literal value");
+		ResourceBundle bundle = com.sigio.json.BundleLoader.getBundle();
+		throw new JSONException(String.format(bundle.getString("INVALID_LITERAL"), str));
 	}
 
 }

@@ -20,7 +20,9 @@ package com.sigio.json;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Set;
+
 /**
  * Class to implement a JSON object as defined in RFC4627.
  */
@@ -63,11 +65,14 @@ public class JSONObject extends HashMap<String,Object> {
 	 * Private method to check if the passed in object is a suitable
 	 * JSON value class.
 	 */
-	private void checkInstance(Object o) {
+	private void checkInstance(Object o) throws ClassCastException {
 		if (o == null)
 			o = JSONLiteral.NULL;
-		if (!JSONValue.isInstance(o))
-			throw new ClassCastException(o.getClass().getName() + " is not a valid JSON value");
+		if (!JSONValue.isInstance(o)) {
+			ResourceBundle bundle = com.sigio.json.BundleLoader.getBundle();
+			String message = String.format(bundle.getString("INVALID_VALUE"), o.getClass().getName());
+			throw new ClassCastException(message);
+		}
 	}
 
 	/**

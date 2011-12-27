@@ -43,6 +43,7 @@ SOURCES = src/com/sigio/io/FilenamePatternFilter.java \
           src/com/sigio/util/InchToMillimeterValueTransformer.java \
           src/com/sigio/games/dice/Die.java \
           src/com/sigio/games/dice/DoublingDie.java \
+          src/com/sigio/json/BundleLoader.java \
           src/com/sigio/json/JSONArray.java \
           src/com/sigio/json/JSONException.java \
           src/com/sigio/json/JSON.java \
