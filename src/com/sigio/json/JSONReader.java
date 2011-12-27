@@ -452,8 +452,8 @@ public class JSONReader extends PushbackReader {
 	 * error is detected in the input.
 	 */
 	private JSONException syntaxException(String message) {
-		String location = new String(" at character " + this.index);
-		return new JSONException(message + location);
+		String location = String.format(this.bundle.getString("AT"), this.index);
+		return new JSONException(message + " " + location);
 	}
 
 }
