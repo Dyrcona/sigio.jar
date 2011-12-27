@@ -24,7 +24,7 @@ import java.text.Normalizer;
  * Class to output strings as valid JSON strings. It exists mainly for
  * the static, to JSONString method.
  */
-public class JSONStringAdapter {
+class JSONStringAdapter {
 
 	private static char[] quote_seq = { JSON.ESCAPE_CHAR, JSON.QUOTE_CHAR };
 	private static char[] backspace_seq = { JSON.ESCAPE_CHAR, 'b' };
@@ -38,7 +38,7 @@ public class JSONStringAdapter {
 	 * Converts content of a java.lang.String to a format suitable for
 	 * JSON.
 	 */
-	public static String toJSONString(String str) {
+	static String toJSONString(String str) {
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < str.length(); i++) {
