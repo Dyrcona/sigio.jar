@@ -16,24 +16,13 @@
 # License along with sigio.jar.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-# We make a few assumptions in the Makefile, for now.
-#
-# 1. We assume that your javac, javadoc and jar tools are already in
-# your executable path.  We might add a JDKPATH or some such variable
-# so you specify which JDK tools to use in the future.
-#
-# 2. We assume that your CLASSPATH is set up properly and includes the
-# Rhino jar file.  At some point in the future, we'll likely add a
-# variable to set the path to Rhino.  (Rhino is currently the only
-# non-standard package needed by sigio.jar.)
+# This Makefile assumes that your javac, javadoc and jar tools are
+# already in your executable path.  We might add a JDKPATH or some
+# such variable so you specify which JDK tools to use in the future.
 
 DOC_DIR ?= doc/
 
 SOURCES = src/com/sigio/io/FilenamePatternFilter.java \
-          src/com/sigio/io/FilenameExtensionFilter.java \
-          src/com/sigio/js/ScriptRunner.java \
-          src/com/sigio/js/scriptrunner/plugins/Plugin.java \
-          src/com/sigio/js/scriptrunner/plugins/LoggerPlugin.java \
           src/com/sigio/sql/ResultSetTableModel.java \
           src/com/sigio/sql/DbPropertiesFileFilter.java \
           src/com/sigio/util/ValueTransformer.java \
@@ -56,13 +45,42 @@ SOURCES = src/com/sigio/io/FilenamePatternFilter.java \
 
 DOC_SOURCES = $(SOURCES) \
           src/com/sigio/io/package-info.java \
-          src/com/sigio/js/package-info.java \
-          src/com/sigio/js/scriptrunner/plugins/package-info.java \
           src/com/sigio/sql/package-info.java \
           src/com/sigio/util/package-info.java \
           src/com/sigio/games/package-info.java \
           src/com/sigio/games/dice/package-info.java \
           src/com/sigio/json/package-info.java
+
+RESOURCES = src/com/sigio/games/dice/Die_en_US.properties \
+          src/com/sigio/games/dice/DoublingDie_en_US.properties \
+          src/com/sigio/json/JSON_en_US.properties \
+          src/com/sigio/util/NumberToDoubleValueTransformer_en_US.properties \
+          src/com/sigio/util/ValueTransformer_en_US.properties
+
+
+# Stuff for JavaScript package.
+JS_SOURCES = src/com/sigio/io/FilenameExtensionFilter.java \
+          src/com/sigio/js/ScriptRunner.java \
+          src/com/sigio/js/scriptrunner/plugins/Plugin.java \
+          src/com/sigio/js/scriptrunner/plugins/LoggerPlugin.java
+
+JS_DOC_SOURCES = src/com/sigio/js/package-info.java \
+          src/com/sigio/js/scriptrunner/plugins/package-info.java
+
+JS_RESOURCES = src/com/sigio/js/ScriptRunner_en_US.properties \
+         src/com/sigio/js/scriptrunner/plugins/LoggerPlugin_en_US.properties
+
+
+# Make the JavaScript package optional and off by default.
+ifdef WITH_JS
+
+SOURCES += $(JS_SOURCES)
+
+DOC_SOURCES += $(JS_DOC_SOURCES)
+
+RESOURCES += $(JS_RESOURCES)
+
+endif
 
 .PHONY: documentation compile jar cp-resources clean
 
@@ -72,8 +90,8 @@ jar: compile cp-resources
 compile: $(SOURCES)
 	javac $(JAVAC_ARGS) -d ./ -sourcepath src/ $^
 
-cp-resources:
-	for file in $$(find src/ -name '*.properties'); \
+cp-resources: $(RESOURCES)
+	for file in $^ ; \
 	do \
 		tgt=$${file#src/}; \
 		cp $$file $$tgt; \
