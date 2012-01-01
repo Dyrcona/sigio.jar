@@ -23,6 +23,7 @@
 DOC_DIR ?= doc/
 
 SOURCES = src/com/sigio/io/FilenamePatternFilter.java \
+          src/com/sigio/io/FilenameExtensionFilter.java \
           src/com/sigio/sql/ResultSetTableModel.java \
           src/com/sigio/sql/DbPropertiesFileFilter.java \
           src/com/sigio/util/ValueTransformer.java \
@@ -59,8 +60,7 @@ RESOURCES = src/com/sigio/games/dice/Die_en_US.properties \
 
 
 # Stuff for JavaScript package.
-JS_SOURCES = src/com/sigio/io/FilenameExtensionFilter.java \
-          src/com/sigio/js/ScriptRunner.java \
+JS_SOURCES = src/com/sigio/js/ScriptRunner.java \
           src/com/sigio/js/scriptrunner/plugins/Plugin.java \
           src/com/sigio/js/scriptrunner/plugins/LoggerPlugin.java
 
@@ -86,6 +86,9 @@ endif
 
 jar: compile cp-resources
 	jar cf sigio.jar com/
+ifndef NO_SRC
+	jar uf sigio.jar src/
+endif
 
 compile: $(SOURCES)
 	javac $(JAVAC_ARGS) -d ./ -sourcepath src/ $^
