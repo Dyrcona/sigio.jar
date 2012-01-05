@@ -46,18 +46,18 @@ public abstract class ValueTransformer {
 
 	/**
 	 * Perform a reverse transformation. The inherited implementation
-	 * always throws a RuntimeException.
+	 * always throws an UnsupportedOperationException.
 	 *
 	 * @param o the instance object to reverse transform
 	 * @return new object with the transformed value
-	 * @throws RuntimeException when a reverse transformation is not
-	 * supported
+	 * @throws UnsupportedOperationException when a reverse
+	 * transformation is not supported
 	 */
 	public Object reverseTransformedValue(Object o) {
 		if (this.allowsReverseTransformation())
 			return this.transformedValue(o);
 		else {
-			RuntimeException ex;
+			UnsupportedOperationException ex;
 			String exceptionFormat;
 			String className = this.getClass().getName();
 			try {
@@ -68,7 +68,7 @@ public abstract class ValueTransformer {
 				exceptionFormat = "Class %s does not implement reverse transformation.";
 			}
 			String message = String.format(exceptionFormat, className);
-			ex = new RuntimeException(message);
+			ex = new UnsupportedOperationException(message);
 			throw ex;
 		}
 	}
