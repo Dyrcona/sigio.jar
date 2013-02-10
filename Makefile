@@ -52,11 +52,11 @@ DOC_SOURCES = $(SOURCES) \
           src/com/sigio/games/dice/package-info.java \
           src/com/sigio/json/package-info.java
 
-RESOURCES = src/com/sigio/games/dice/Die_en_US.properties \
-          src/com/sigio/games/dice/DoublingDie_en_US.properties \
-          src/com/sigio/json/JSON_en_US.properties \
-          src/com/sigio/util/NumberToDoubleValueTransformer_en_US.properties \
-          src/com/sigio/util/ValueTransformer_en_US.properties
+RESOURCES = src/com/sigio/games/dice/Die.properties \
+          src/com/sigio/games/dice/DoublingDie.properties \
+          src/com/sigio/json/JSON.properties \
+          src/com/sigio/util/NumberToDoubleValueTransformer.properties \
+          src/com/sigio/util/ValueTransformer.properties
 
 
 # Stuff for JavaScript package.
@@ -67,8 +67,8 @@ JS_SOURCES = src/com/sigio/js/ScriptRunner.java \
 JS_DOC_SOURCES = src/com/sigio/js/package-info.java \
           src/com/sigio/js/scriptrunner/plugins/package-info.java
 
-JS_RESOURCES = src/com/sigio/js/ScriptRunner_en_US.properties \
-         src/com/sigio/js/scriptrunner/plugins/LoggerPlugin_en_US.properties
+JS_RESOURCES = src/com/sigio/js/ScriptRunner.properties \
+         src/com/sigio/js/scriptrunner/plugins/LoggerPlugin.properties
 
 
 # Make the JavaScript package optional and off by default.
