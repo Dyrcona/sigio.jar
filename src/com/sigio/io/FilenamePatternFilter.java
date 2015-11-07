@@ -1,5 +1,5 @@
 /*
- * Copyright © 2011 Jason J.A. Stephenson
+ * Copyright © 2011,2015 Jason J.A. Stephenson
  * 
  * This file is part of sigio.jar.
  * 
@@ -125,6 +125,21 @@ public class FilenamePatternFilter implements FilenameFilter {
 	}
 
 	/**
+	 * Construct a FilenamePatternFilter with an array of regular
+	 * expression pattern strings and an array of option masks for the
+	 * regular expression compiler.  There should be one option for each
+	 * pattern string.
+	 *
+	 * @param patternStrs array of regular expression pattern strings
+	 * @param reOpts array of regular expression compiler options
+	 */
+	public FilenamePatternFilter(String[] patternStrs, int[] reOpts) {
+		m_patternList = new ArrayList<Pattern>();
+		for (int i = 0; i < patternStrs.length; i++)
+			this.add(Pattern.compile(patternStrs[i], reOpts[i]));
+	}
+
+	/**
 	 * Add a pre-compiled regular expression pattern to the internal
 	 * list.
 	 *
@@ -187,6 +202,19 @@ public class FilenamePatternFilter implements FilenameFilter {
 	public void add(String[] patternStrs, int reOpts) {
 		for (int i = 0; i < patternStrs.length; i++)
 			this.add(patternStrs[i], reOpts);
+	}
+
+	/**
+	 * Add an array of regular expression pattern strings to the
+	 * internal list and compile them with an array of option masks, one
+	 * for each pattern string.
+	 *
+	 * @param patternStrs array of regular expression strings to add
+	 * @param reOpts array of regular expression compiler options
+	 */
+	public void add(String[] patternStrs, int[] reOpts) {
+		for (int i = 0; i < patternStrs.length; i++)
+			this.add(patternStrs[i], reOpts[i]);
 	}
 
 	/**
