@@ -32,8 +32,6 @@ package com.sigio.games.dice;
 
 public class DoublingDie extends Die {
 
-  private int m_maxSides;
-
   /**
    * Creates a new DoublingDie object with <code>s</code> number of
    * sides.
@@ -42,7 +40,6 @@ public class DoublingDie extends Die {
    */
   public DoublingDie(int s) {
     super(s);
-    this.setMaxSides(s);
   }
 
   /**
@@ -51,24 +48,16 @@ public class DoublingDie extends Die {
    */
   public DoublingDie() {
     super(6);
-    this.setMaxSides(6);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public void setSides(int n) {
-    super.setSides(n);
-    this.setMaxSides(n);
-  }
-  
   /**
    * Simulates rolling a number of doubling dice with a number of
    * sides represented by this instance.
    *
    * @param n number of dice to roll.
    * @return an int holding the result of rolling the dice
-   */ 
+   */
+  @Override
   public int roll(int n) {
     int result = 0;
     for (int i = 0; i < Math.abs(n); i++) {
@@ -79,11 +68,5 @@ public class DoublingDie extends Die {
       result += r;
     }
     return result;
-  }
-
-  private void setMaxSides(int n) {
-    m_maxSides = 1;
-    for (int i = 0; i < n; i++)
-      m_maxSides *= 2;
   }
 }
