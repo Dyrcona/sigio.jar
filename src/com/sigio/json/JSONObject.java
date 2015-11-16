@@ -28,91 +28,91 @@ import java.util.Set;
  */
 public class JSONObject extends HashMap<String,Object> {
 
-	/**
-	 * Construct an empty JSONObject with a default initial capacity
-	 * and load factor.
-	 */
-	public JSONObject() {
-		super();
-	}
+  /**
+   * Construct an empty JSONObject with a default initial capacity
+   * and load factor.
+   */
+  public JSONObject() {
+    super();
+  }
 
-	/**
-	 * Construct a JSONObject with an initial capacity and default
-	 * load factor.
-	 *
-	 * @param initialCapacity initial capacity of the map
-	 */
-	public JSONObject(int initialCapacity) {
-		super(initialCapacity);
-	}
+  /**
+   * Construct a JSONObject with an initial capacity and default
+   * load factor.
+   *
+   * @param initialCapacity initial capacity of the map
+   */
+  public JSONObject(int initialCapacity) {
+    super(initialCapacity);
+  }
 
-	/**
-	 * Constructs a JSONObject with an initial capacity and load
-	 * factor.
-	 */
-	public JSONObject(int initialCapacity, float loadFactor) {
-		super(initialCapacity, loadFactor);
-	}
+  /**
+   * Constructs a JSONObject with an initial capacity and load
+   * factor.
+   */
+  public JSONObject(int initialCapacity, float loadFactor) {
+    super(initialCapacity, loadFactor);
+  }
 
-	/**
-	 * Construct a JSONObject from an existing map of objects.
-	 */
-	public JSONObject(Map<? extends String, ? extends Object> map) {
-		super(map);
-	}
-	
-	/**
-	 * Private method to check if the passed in object is a suitable
-	 * JSON value class.
-	 */
-	private void checkInstance(Object o) throws ClassCastException {
-		if (o == null)
-			o = JSONLiteral.NULL;
-		if (!JSONValue.isInstance(o)) {
-			ResourceBundle bundle = com.sigio.json.BundleLoader.getBundle();
-			String message = String.format(bundle.getString("INVALID_VALUE"), o.getClass().getName());
-			throw new ClassCastException(message);
-		}
-	}
+  /**
+   * Construct a JSONObject from an existing map of objects.
+   */
+  public JSONObject(Map<? extends String, ? extends Object> map) {
+    super(map);
+  }
+  
+  /**
+   * Private method to check if the passed in object is a suitable
+   * JSON value class.
+   */
+  private void checkInstance(Object o) throws ClassCastException {
+    if (o == null)
+      o = JSONLiteral.NULL;
+    if (!JSONValue.isInstance(o)) {
+      ResourceBundle bundle = com.sigio.json.BundleLoader.getBundle();
+      String message = String.format(bundle.getString("INVALID_VALUE"), o.getClass().getName());
+      throw new ClassCastException(message);
+    }
+  }
 
-	/**
-	 * Associates the specified value with the specified key in this
-	 * object.
-	 *
-	 * @param key JSON object field name with which the specified
-	 * value is to be associated
-	 * @param value value for the JSON field
-	 * @return the previous value associated with {@code key}, or
-	 * {@code null} if there was no mapping for {@code key}.
-	 * @throws NullPointerException if the {@code key} is null
-	 * @throws ClassCastException if the passed in value is not a
-	 * suitable JSON object
-	 */
-	@Override
-	public Object put(String key, Object value) throws ClassCastException {
-		if (key == null)
-			throw new NullPointerException();
-		this.checkInstance(value);
-		return super.put(key, value);
-	}
+  /**
+   * Associates the specified value with the specified key in this
+   * object.
+   *
+   * @param key JSON object field name with which the specified
+   * value is to be associated
+   * @param value value for the JSON field
+   * @return the previous value associated with {@code key}, or
+   * {@code null} if there was no mapping for {@code key}.
+   * @throws NullPointerException if the {@code key} is null
+   * @throws ClassCastException if the passed in value is not a
+   * suitable JSON object
+   */
+  @Override
+  public Object put(String key, Object value) throws ClassCastException {
+    if (key == null)
+      throw new NullPointerException();
+    this.checkInstance(value);
+    return super.put(key, value);
+  }
 
-	/**
-	 * Copies all of the mappings from the specified map to this map.
-	 *
-	 * @param map mappings to be stored in this map
-	 * @throws NullPointerException if the specified map is null or contains null keys
-	 * @throws ClassCastException if the passed in value is not a
-	 * suitable JSON object
-	 */
-	@Override
-	public void putAll(Map<? extends String, ? extends Object> map) throws ClassCastException {
-		Set<? extends String> keys = map.keySet();
-		for (String key : keys) {
-			if (key == null)
-				throw new NullPointerException();
-			this.checkInstance(map.get(key));
-		}
-		super.putAll(map);
-	}
+  /**
+   * Copies all of the mappings from the specified map to this map.
+   *
+   * @param map mappings to be stored in this map
+   * @throws NullPointerException if the specified map is null or contains null keys
+   * @throws ClassCastException if the passed in value is not a
+   * suitable JSON object
+   */
+  @Override
+  public void putAll(Map<? extends String, ? extends Object> map) throws ClassCastException {
+    Set<? extends String> keys = map.keySet();
+    for (String key : keys) {
+      if (key == null)
+        throw new NullPointerException();
+      this.checkInstance(map.get(key));
+    }
+    super.putAll(map);
+  }
 
 }

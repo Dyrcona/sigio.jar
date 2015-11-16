@@ -23,83 +23,83 @@ package com.sigio.json;
  */
 public enum JSONValue {
 
-	/**
-	 * Class for JSON objects.
-	 */
-	OBJECT(JSONObject.class),
-	/**
-	 * Class for JSON arrays.
-	 */
-	ARRAY(JSONArray.class),
-	/**
-	 * Class for JSON numbers.
-	 */
-	NUMBER(Number.class),
-	/**
-	 * Class for JSON strings.
-	 */
-	STRING(String.class),
-	/**
-	 * Class (enum) for JSON literal values.
-	 */
-	LITERAL(JSONLiteral.class);
+  /**
+   * Class for JSON objects.
+   */
+  OBJECT(JSONObject.class),
+  /**
+   * Class for JSON arrays.
+   */
+  ARRAY(JSONArray.class),
+  /**
+   * Class for JSON numbers.
+   */
+  NUMBER(Number.class),
+  /**
+   * Class for JSON strings.
+   */
+  STRING(String.class),
+  /**
+   * Class (enum) for JSON literal values.
+   */
+  LITERAL(JSONLiteral.class);
 
-	private final Class<?> klass;
+  private final Class<?> klass;
 
-	/**
-	 * Our hidden constructor.
-	 */
-	JSONValue(Class<?> k) {
-		this.klass = k;
-	}
+  /**
+   * Our hidden constructor.
+   */
+  JSONValue(Class<?> k) {
+    this.klass = k;
+  }
 
-	/**
-	 * Accessor for the class member.
-	 *
-	 * @return Class<?> of the specific enum value.
-	 */
-	public Class<?> valueClass() {
-		return this.klass;
-	}
+  /**
+   * Accessor for the class member.
+   *
+   * @return Class<?> of the specific enum value.
+   */
+  public Class<?> valueClass() {
+    return this.klass;
+  }
 
-	/**
-	 * Returns a string representation of the object.
-	 *
-	 * @return The name of class of the specific enum value
-	 */
-	@Override
-	public String toString() {
-		return this.klass.getName();
-	}
+  /**
+   * Returns a string representation of the object.
+   *
+   * @return The name of class of the specific enum value
+   */
+  @Override
+  public String toString() {
+    return this.klass.getName();
+  }
 
-	/**
-	 * Check if a Class can be used as a JSON value.
-	 *
-	 * @param k class to check
-	 * @return <code>true</code> if the class is a viable JSON value
-	 * class, <code>false</code> if not
-	 */
-	public static boolean isAssignableFrom(Class<?> k) {
-		for (JSONValue v : JSONValue.values()) {
-			if (v.valueClass().isAssignableFrom(k))
-				return true;
-		}
-		return false;
-	}
+  /**
+   * Check if a Class can be used as a JSON value.
+   *
+   * @param k class to check
+   * @return <code>true</code> if the class is a viable JSON value
+   * class, <code>false</code> if not
+   */
+  public static boolean isAssignableFrom(Class<?> k) {
+    for (JSONValue v : JSONValue.values()) {
+      if (v.valueClass().isAssignableFrom(k))
+        return true;
+    }
+    return false;
+  }
 
-	/**
-	 * Check if an instantiated object is a valid JSON value.
-	 *
-	 * @param obj object to check
-	 * @return <code>true</code> if the object is a viable JSON value,
-	 * <code>false</code> if not
-	 */
-	public static boolean isInstance(Object obj) {
-		for (JSONValue v : JSONValue.values()) {
-			if (v.valueClass().isInstance(obj))
-				return true;
-		}
-		return false;
-	}
+  /**
+   * Check if an instantiated object is a valid JSON value.
+   *
+   * @param obj object to check
+   * @return <code>true</code> if the object is a viable JSON value,
+   * <code>false</code> if not
+   */
+  public static boolean isInstance(Object obj) {
+    for (JSONValue v : JSONValue.values()) {
+      if (v.valueClass().isInstance(obj))
+        return true;
+    }
+    return false;
+  }
 
 }

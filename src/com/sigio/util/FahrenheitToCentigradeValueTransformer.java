@@ -25,50 +25,50 @@ package com.sigio.util;
 
 public class FahrenheitToCentigradeValueTransformer extends NumberToDoubleValueTransformer {
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @return always returns <code>true</code>
-	 */
-	public boolean allowsReverseTransformation() { return true; }
+  /**
+   * {@inheritDoc}
+   *
+   * @return always returns <code>true</code>
+   */
+  public boolean allowsReverseTransformation() { return true; }
 
-	/**
-	 * Transforms a number with an assumed value of degrees Fahrenheit
-	 * into a double with a value in degrees Centrigrade.
-	 *
-	 * @param o {@inheritDoc}
-	 * @return {@inheritDoc}
-	 * @throws IllegalArgumentException {@inheritDoc}
-	 */
-	public Object transformedValue(Object o) {
-		if (o instanceof Number) {
-			Number f = (Number) o;
-			double c = (f.doubleValue() - 32.0) * 5.0 / 9.0;
-			return new Double(c);
-		}
-		else throwIllegalArgumentException("transformedValue");
-		return null;
-	}
+  /**
+   * Transforms a number with an assumed value of degrees Fahrenheit
+   * into a double with a value in degrees Centrigrade.
+   *
+   * @param o {@inheritDoc}
+   * @return {@inheritDoc}
+   * @throws IllegalArgumentException {@inheritDoc}
+   */
+  public Object transformedValue(Object o) {
+    if (o instanceof Number) {
+      Number f = (Number) o;
+      double c = (f.doubleValue() - 32.0) * 5.0 / 9.0;
+      return new Double(c);
+    }
+    else throwIllegalArgumentException("transformedValue");
+    return null;
+  }
 
-	/**
-	 * Transforms a number with an assumed value of degrees Centigrade
-	 * into a double with a value in degrees Fahrenheit.
-	 *
-	 * @param o <code>java.lang.Number</code> with value to be
-	 * transformed
-	 * @return <code>java.lang.Double</code> with the transformed
-	 * value of o
-	 * @throws IllegalArgumentException if o is not an instance of
-	 * <code>java.lang.Number</code>
-	 */
-	public Object reverseTransformedValue(Object o) {
-		if (o instanceof Number) {
-			Number c = (Number) o;
-			double f = c.doubleValue() * 9.0 / 5.0 + 32.0;
-			return new Double(f);
-		}
-		else throwIllegalArgumentException("reverseTransformedValue");
-		return null;
-	}
+  /**
+   * Transforms a number with an assumed value of degrees Centigrade
+   * into a double with a value in degrees Fahrenheit.
+   *
+   * @param o <code>java.lang.Number</code> with value to be
+   * transformed
+   * @return <code>java.lang.Double</code> with the transformed
+   * value of o
+   * @throws IllegalArgumentException if o is not an instance of
+   * <code>java.lang.Number</code>
+   */
+  public Object reverseTransformedValue(Object o) {
+    if (o instanceof Number) {
+      Number c = (Number) o;
+      double f = c.doubleValue() * 9.0 / 5.0 + 32.0;
+      return new Double(f);
+    }
+    else throwIllegalArgumentException("reverseTransformedValue");
+    return null;
+  }
 
 }

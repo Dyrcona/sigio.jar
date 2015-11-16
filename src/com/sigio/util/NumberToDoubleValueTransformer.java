@@ -28,61 +28,61 @@ import java.util.ResourceBundle;
 
 public class NumberToDoubleValueTransformer extends ValueTransformer {
 
-	/**
-	 * A convenience method for when an instance of this class or one
-	 * of its children needs to throw an IllegalArgumentException,
-	 * which they do if the parameter to one of the transformation
-	 * methods is not an instance of Number or one of its subclasses.
-	 *
-	 * @param methodName the name of the method where the exception occurred
-	 * @throws IllegalArgumentException because that is what it does
-	 */
-	protected final void throwIllegalArgumentException(String methodName) {
-		String myClassName = this.getClass().getName();
-		String paramClassName = this.transformedValueParamClass().getName();
-		String message = null;
-		try {
-			ResourceBundle b = ResourceBundle.getBundle("com.sigio.util.NumberToDoubleValueTransformer");
-			message = String.format(b.getString("msgformat"), methodName, myClassName, paramClassName);
-		}
-		catch (MissingResourceException e) {
-			message = String.format("Method %1$s of %2$s requires instance of %3$s.", methodName, myClassName, paramClassName);
-		}
-		throw new IllegalArgumentException(message);
-	}
+  /**
+   * A convenience method for when an instance of this class or one
+   * of its children needs to throw an IllegalArgumentException,
+   * which they do if the parameter to one of the transformation
+   * methods is not an instance of Number or one of its subclasses.
+   *
+   * @param methodName the name of the method where the exception occurred
+   * @throws IllegalArgumentException because that is what it does
+   */
+  protected final void throwIllegalArgumentException(String methodName) {
+    String myClassName = this.getClass().getName();
+    String paramClassName = this.transformedValueParamClass().getName();
+    String message = null;
+    try {
+      ResourceBundle b = ResourceBundle.getBundle("com.sigio.util.NumberToDoubleValueTransformer");
+      message = String.format(b.getString("msgformat"), methodName, myClassName, paramClassName);
+    }
+    catch (MissingResourceException e) {
+      message = String.format("Method %1$s of %2$s requires instance of %3$s.", methodName, myClassName, paramClassName);
+    }
+    throw new IllegalArgumentException(message);
+  }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @return Class<Double> because that's what we do
-	 */
-	public final Class<Double> transformedValueReturnClass() { return Double.class; }
+  /**
+   * {@inheritDoc}
+   *
+   * @return Class<Double> because that's what we do
+   */
+  public final Class<Double> transformedValueReturnClass() { return Double.class; }
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @return Class<Number> because that's what we do
-	 */
-	public final Class<Number> transformedValueParamClass() { return Number.class; }
+  /**
+   * {@inheritDoc}
+   *
+   * @return Class<Number> because that's what we do
+   */
+  public final Class<Number> transformedValueParamClass() { return Number.class; }
 
-	/**
-	 * Transforms an instance of Number (or one of its subclasses)
-	 * into an instance of Double. Not very useful in and of itself,
-	 * but it makes a nice base to build on.
-	 *
-	 * @param o <code>java.lang.Number</code> to be transformed
-	 * @return <code>java.lang.Double</code> with the transformed
-	 * value of o
-	 * @throws IllegalArgumentException if o is not an instance of
-	 * <code>java.lang.Number</code>
-	 */
-	public Object transformedValue(Object o) {
-		if (o instanceof Number) {
-			Number n = (Number) o;
-			return new Double(n.doubleValue());
-		}
-		else throwIllegalArgumentException("transformedValue");
-		return null;
-	}
+  /**
+   * Transforms an instance of Number (or one of its subclasses)
+   * into an instance of Double. Not very useful in and of itself,
+   * but it makes a nice base to build on.
+   *
+   * @param o <code>java.lang.Number</code> to be transformed
+   * @return <code>java.lang.Double</code> with the transformed
+   * value of o
+   * @throws IllegalArgumentException if o is not an instance of
+   * <code>java.lang.Number</code>
+   */
+  public Object transformedValue(Object o) {
+    if (o instanceof Number) {
+      Number n = (Number) o;
+      return new Double(n.doubleValue());
+    }
+    else throwIllegalArgumentException("transformedValue");
+    return null;
+  }
 
 }

@@ -24,12 +24,12 @@ import java.util.ResourceBundle;
  */
 class BundleLoader {
 
-	private static ResourceBundle bundle = null;
+  private static ResourceBundle bundle = null;
 
-	static ResourceBundle getBundle() {
-		if (bundle == null)
-			bundle = ResourceBundle.getBundle("com.sigio.json.JSON");
-		return bundle;
-	}
+  static ResourceBundle getBundle() {
+    if (bundle == null)
+      bundle = ResourceBundle.getBundle("com.sigio.json.JSON");
+    return bundle;
+  }
 
 }

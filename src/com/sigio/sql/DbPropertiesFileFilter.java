@@ -35,84 +35,84 @@ import java.util.Properties;
  */
 public class DbPropertiesFileFilter implements FileFilter {
 
-	private ArrayList<String> m_extensionList;
+  private ArrayList<String> m_extensionList;
 
-	/**
-	 * Construct a DbPropertiesFileFilter without an extensions list.
-	 */
-	public DbPropertiesFileFilter() {
-		m_extensionList = null;
-	}
+  /**
+   * Construct a DbPropertiesFileFilter without an extensions list.
+   */
+  public DbPropertiesFileFilter() {
+    m_extensionList = null;
+  }
 
-	/**
-	 * Construct a DbPropertiesFileFilter with a list of extensions
-	 * that the filename must have in order to be considered a valid
-	 * properties file. The filename need matchonly one extension from
-	 * the list.
-	 *
-	 *@param extensions array of strings to match against the filename
-	 */
-	public DbPropertiesFileFilter(String[] extensions) {
-		m_extensionList = new ArrayList<String>();
-		for (int i = 0; i < extensions.length; i++)
-			m_extensionList.add(extensions[i]);
-	}
+  /**
+   * Construct a DbPropertiesFileFilter with a list of extensions
+   * that the filename must have in order to be considered a valid
+   * properties file. The filename need matchonly one extension from
+   * the list.
+   *
+   *@param extensions array of strings to match against the filename
+   */
+  public DbPropertiesFileFilter(String[] extensions) {
+    m_extensionList = new ArrayList<String>();
+    for (int i = 0; i < extensions.length; i++)
+      m_extensionList.add(extensions[i]);
+  }
 
-	/**
-	 * Construct a DbPropertiesFileFilter with a list of extensions
-	 * that the filename must have in order to be considered a valid
-	 * properties file. The filename need matchonly one extension from
-	 * the list.
-	 *
-	 *@param extensions collection of strings to match against the
-	 *filename
-	 */
-	public DbPropertiesFileFilter(Collection<String> extensions) {
-		m_extensionList = new ArrayList<String>(extensions);
-	}
+  /**
+   * Construct a DbPropertiesFileFilter with a list of extensions
+   * that the filename must have in order to be considered a valid
+   * properties file. The filename need matchonly one extension from
+   * the list.
+   *
+   *@param extensions collection of strings to match against the
+   *filename
+   */
+  public DbPropertiesFileFilter(Collection<String> extensions) {
+    m_extensionList = new ArrayList<String>(extensions);
+  }
 
-	/**
-	 * Tests whether or not the specified abstract pathname should be
-	 * included in a pathname list.
-	 *
-	 * @param pathname the abstract pathname to be tested
-	 * @return <code>true</code> if the file appears to be a valid
-	 * JDBC properties file; <code>false</code> otherwise
-	 */
-	public boolean accept(File pathname) {
-		boolean isAcceptable = false;
-		if (pathname.exists() && pathname.isFile() && pathname.canRead()) {
-			try {
+  /**
+   * Tests whether or not the specified abstract pathname should be
+   * included in a pathname list.
+   *
+   * @param pathname the abstract pathname to be tested
+   * @return <code>true</code> if the file appears to be a valid
+   * JDBC properties file; <code>false</code> otherwise
+   */
+  public boolean accept(File pathname) {
+    boolean isAcceptable = false;
+    if (pathname.exists() && pathname.isFile() && pathname.canRead()) {
+      try {
 
-				if (m_extensionList != null)
-					if (!checkFilenameExtension(pathname.getName()))
-						return isAcceptable;
+        if (m_extensionList != null)
+          if (!checkFilenameExtension(pathname.getName()))
+            return isAcceptable;
 
-				FileInputStream in = new FileInputStream(pathname);
-				Properties p = new Properties();
-				p.load(in);
-				in.close();
-				if (p.containsKey("driver") && p.containsKey("url"))
-					isAcceptable = true;
-			}
-			catch (IOException e) {
-				isAcceptable = false;
-			}
-		}
-		return isAcceptable;
-	}
+        FileInputStream in = new FileInputStream(pathname);
+        Properties p = new Properties();
+        p.load(in);
+        in.close();
+        if (p.containsKey("driver") && p.containsKey("url"))
+          isAcceptable = true;
+      }
+      catch (IOException e) {
+        isAcceptable = false;
+      }
+    }
+    return isAcceptable;
+  }
 
-	private boolean checkFilenameExtension(String filename) {
-		boolean isAcceptable = false;
-		for (int i = 0; i < m_extensionList.size(); i++) {
-			String ext = m_extensionList.get(i);
-			if (!ext.startsWith("."))
-				ext = "." + ext;
-			isAcceptable = filename.endsWith(ext);
-			if (isAcceptable)
-				break;
-		}
-		return isAcceptable;
-	}
+  private boolean checkFilenameExtension(String filename) {
+    boolean isAcceptable = false;
+    for (int i = 0; i < m_extensionList.size(); i++) {
+      String ext = m_extensionList.get(i);
+      if (!ext.startsWith("."))
+        ext = "." + ext;
+      isAcceptable = filename.endsWith(ext);
+      if (isAcceptable)
+        break;
+    }
+    return isAcceptable;
+  }
 
 }

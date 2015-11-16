@@ -35,74 +35,74 @@ import java.util.ResourceBundle;
  */
 public abstract class ValueTransformer {
 
-	/**
-	 * Check if the instance can do a reverse transformation. The
-	 * inherited implementation always returns <code>false</code>.
-	 *
-	 * @return <code>true</code> if a reverse transformation is
-	 * supported; <code>false</code> if it is not
-	 */
-	public boolean allowsReverseTransformation() { return false; }
+  /**
+   * Check if the instance can do a reverse transformation. The
+   * inherited implementation always returns <code>false</code>.
+   *
+   * @return <code>true</code> if a reverse transformation is
+   * supported; <code>false</code> if it is not
+   */
+  public boolean allowsReverseTransformation() { return false; }
 
-	/**
-	 * Perform a reverse transformation. The inherited implementation
-	 * always throws an UnsupportedOperationException.
-	 *
-	 * @param o the instance object to reverse transform
-	 * @return new object with the transformed value
-	 * @throws UnsupportedOperationException when a reverse
-	 * transformation is not supported
-	 */
-	public Object reverseTransformedValue(Object o) {
-		if (this.allowsReverseTransformation())
-			return this.transformedValue(o);
-		else {
-			UnsupportedOperationException ex;
-			String exceptionFormat;
-			String className = this.getClass().getName();
-			try {
-				ResourceBundle b = ResourceBundle.getBundle("com.sigio.util.ValueTransformer");
-				exceptionFormat = b.getString("exceptionformat");
-			}
-			catch (MissingResourceException e) {
-				exceptionFormat = "Class %s does not implement reverse transformation.";
-			}
-			String message = String.format(exceptionFormat, className);
-			ex = new UnsupportedOperationException(message);
-			throw ex;
-		}
-	}
+  /**
+   * Perform a reverse transformation. The inherited implementation
+   * always throws an UnsupportedOperationException.
+   *
+   * @param o the instance object to reverse transform
+   * @return new object with the transformed value
+   * @throws UnsupportedOperationException when a reverse
+   * transformation is not supported
+   */
+  public Object reverseTransformedValue(Object o) {
+    if (this.allowsReverseTransformation())
+      return this.transformedValue(o);
+    else {
+      UnsupportedOperationException ex;
+      String exceptionFormat;
+      String className = this.getClass().getName();
+      try {
+        ResourceBundle b = ResourceBundle.getBundle("com.sigio.util.ValueTransformer");
+        exceptionFormat = b.getString("exceptionformat");
+      }
+      catch (MissingResourceException e) {
+        exceptionFormat = "Class %s does not implement reverse transformation.";
+      }
+      String message = String.format(exceptionFormat, className);
+      ex = new UnsupportedOperationException(message);
+      throw ex;
+    }
+  }
 
-	/**
-	 * Transform an object's value. It may throw a RuntimeException or
-	 * one of its subclasses if certain implementation specific
-	 * details are not met. This is, however, at the discretion of the
-	 * subclass implementations.
-	 *
-	 * <p>At a minimum, implementations should throw an
-	 * IllegalArgumentException if the parameter object is not an
-	 * instance of the class returned by
-	 * <code>transformedValueParamClass()</code>.</p>
-	 *
-	 * @param o object whose value is to be transformed
-	 * @return new object with the transformed value
-	 */
-	public abstract Object transformedValue(Object o);
+  /**
+   * Transform an object's value. It may throw a RuntimeException or
+   * one of its subclasses if certain implementation specific
+   * details are not met. This is, however, at the discretion of the
+   * subclass implementations.
+   *
+   * <p>At a minimum, implementations should throw an
+   * IllegalArgumentException if the parameter object is not an
+   * instance of the class returned by
+   * <code>transformedValueParamClass()</code>.</p>
+   *
+   * @param o object whose value is to be transformed
+   * @return new object with the transformed value
+   */
+  public abstract Object transformedValue(Object o);
 
-	/**
-	 * Get the class of the object returned by the transformation methods.
-	 *
-	 * @return class of the objects returned by transformedValue and
-	 * reverseTransformedValue
-	 */
-	public abstract Class<?> transformedValueReturnClass();
+  /**
+   * Get the class of the object returned by the transformation methods.
+   *
+   * @return class of the objects returned by transformedValue and
+   * reverseTransformedValue
+   */
+  public abstract Class<?> transformedValueReturnClass();
 
-	/**
-	 * Get the class (or one of its subclasses) required as the
-	 * parameter to the transformation methods.
-	 *
-	 * @return class of the objects accepted as parameters by
-	 * transformedValue and reverseTransformedValue
-	 */
-	public abstract Class<?> transformedValueParamClass();
+  /**
+   * Get the class (or one of its subclasses) required as the
+   * parameter to the transformation methods.
+   *
+   * @return class of the objects accepted as parameters by
+   * transformedValue and reverseTransformedValue
+   */
+  public abstract Class<?> transformedValueParamClass();
 }
