@@ -4,7 +4,7 @@ This README is rather short, because I assume you know what you are
 doing.
 
 sigio.jar is a small collection of utility classes that I have
-developed over the past couple of years while programming in Java.
+developed over the past several years while programming in Java.
 
 It presently contains six packages:
 
@@ -13,15 +13,6 @@ purposes.
 
 com.sigio.io: Classes for input/output.  Presently has a couple of
 FilenameFilter subclasses that come in handy.
-
-com.sigio.js: Classes that I used to embed the Rhino JavaScript
-library in an application.
-
-The com.sigio.js package is not compiled by default.  If you want to
-include it in your jar or when building the documentation, you will
-need to set the WITH_JS variable.  This assumes that the js.jar from
-Rhino is in your CLASSPATH.  If it is not, you will also need to set
-the CLASSPATH to include the jar file.
 
 com.sigio.json: Classes to read and to write JSON format data as
 specified in RFC4627.

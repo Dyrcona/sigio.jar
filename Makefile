@@ -56,30 +56,6 @@ RESOURCES = src/com/sigio/games/dice/Die.properties \
           src/com/sigio/json/JSON.properties \
           src/com/sigio/util/ValueTransformer.properties
 
-
-# Stuff for JavaScript package.
-JS_SOURCES = src/com/sigio/js/ScriptRunner.java \
-          src/com/sigio/js/scriptrunner/plugins/Plugin.java \
-          src/com/sigio/js/scriptrunner/plugins/LoggerPlugin.java
-
-JS_DOC_SOURCES = src/com/sigio/js/package-info.java \
-          src/com/sigio/js/scriptrunner/plugins/package-info.java
-
-JS_RESOURCES = src/com/sigio/js/ScriptRunner.properties \
-         src/com/sigio/js/scriptrunner/plugins/LoggerPlugin.properties
-
-
-# Make the JavaScript package optional and off by default.
-ifdef WITH_JS
-
-SOURCES += $(JS_SOURCES)
-
-DOC_SOURCES += $(JS_DOC_SOURCES)
-
-RESOURCES += $(JS_RESOURCES)
-
-endif
-
 .PHONY: documentation compile jar cp-resources clean
 
 jar: compile cp-resources
