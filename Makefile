@@ -1,4 +1,4 @@
-# Copyright © 2011 Jason J.A. Stephenson
+# Copyright © 2011,2015 Jason J.A. Stephenson
 #
 # This file is part of sigio.jar.
 #
@@ -29,7 +29,6 @@ SOURCES = src/com/sigio/io/FilenamePatternFilter.java \
           src/com/sigio/util/ValueTransformer.java \
           src/com/sigio/util/YardToMeterValueTransformer.java \
           src/com/sigio/util/FahrenheitToCentigradeValueTransformer.java \
-          src/com/sigio/util/NumberToDoubleValueTransformer.java \
           src/com/sigio/util/InchToMillimeterValueTransformer.java \
           src/com/sigio/games/dice/Die.java \
           src/com/sigio/games/dice/DoublingDie.java \
@@ -55,7 +54,6 @@ DOC_SOURCES = $(SOURCES) \
 RESOURCES = src/com/sigio/games/dice/Die.properties \
           src/com/sigio/games/dice/DoublingDie.properties \
           src/com/sigio/json/JSON.properties \
-          src/com/sigio/util/NumberToDoubleValueTransformer.properties \
           src/com/sigio/util/ValueTransformer.properties
 
 

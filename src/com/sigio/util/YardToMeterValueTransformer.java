@@ -1,5 +1,5 @@
 /*
- * Copyright © 2011 Jason J.A. Stephenson
+ * Copyright © 2015 Jason J.A. Stephenson
  * 
  * This file is part of sigio.jar.
  * 
@@ -19,55 +19,48 @@
 package com.sigio.util;
 
 /**
- * A value transformer to convert yard values to meters and vice
- * versa.
+ * A double value transformer to convert yard values to meters and
+ * vice versa.
+ *
+ * @author Jason J.A. Stephenson
+ * @version 2.0
  */
-public class YardToMeterValueTransformer extends NumberToDoubleValueTransformer {
+public class YardToMeterValueTransformer extends ValueTransformer<Double> {
 
   /**
    * {@inheritDoc}
    *
    * @return always returns <code>true</code>
    */
+  @Override
   public boolean allowsReverseTransformation() { return true; }
 
   /**
-   * Transforms a Number instance with an assumed value in yard to a
-   * Double with a value in meters.
+   * Transforms a <code>Double</code> instance with an assumed value
+   * in yards to a <code>Double</code> with a value in meters.
    *
-   * @param o <cod>java.lang.Number</code> to be transformed
-   * @return <code>java.lang.Double</code> with the value o
+   * @param y <cod>java.lang.Double</code> to be transformed
+   * @return <code>java.lang.Double</code> with the value y
    * divided by 1.0936
-   * @throws IllegalArgumentException {@inheritDoc}
    */
-  public Object transformedValue(Object o) {
-    if (o instanceof Number) {
-      Number y = (Number) o;
-      double m = y.doubleValue() / 1.0936;
-      return new Double(m);
-    }
-    else throwIllegalArgumentException("transformedValue");
-    return null;
+  @Override
+  public Double transformValue(Double y) {
+    double m = y.doubleValue() / 1.0936;
+    return new Double(m);
   }
 
   /**
-   * Transforms a Number instance with an assumed value in
-   * meters to a Double with a value in yards.
+   * Transforms a <code>Double</code> instance with an assumed value
+   * in meters to a <code>Double</code> with a value in yards.
    *
-   * @param o number to be transformed
-   * @return <code>java.lang.Double</code> with the value of o
+   * @param m <code>java.lang.Double</code> to be transformed
+   * @return <code>java.lang.Double</code> with the value of m
    * multiplied by 1.0936
-   * @throws IllegalArgumentException if o is not an instance of
-   * <code>java.lang.Number</code>
    */
-  public Object reverseTransformedValue(Object o) {
-    if (o instanceof Number) {
-      Number m = (Number) o;
-      double y = m.doubleValue() * 1.0936;
-      return new Double(y);
-    }
-    else throwIllegalArgumentException("reverseTransformedValue");
-    return null;
+  @Override
+  public Double reverseTransformValue(Double m) {
+    double y = m.doubleValue() * 1.0936;
+    return new Double(y);
   }
 
 }

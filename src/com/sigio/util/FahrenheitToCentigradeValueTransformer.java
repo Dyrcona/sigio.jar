@@ -1,5 +1,5 @@
 /*
- * Copyright © 2011 Jason J.A. Stephenson
+ * Copyright © 2015 Jason J.A. Stephenson
  * 
  * This file is part of sigio.jar.
  * 
@@ -19,56 +19,49 @@
 package com.sigio.util;
 
 /**
- * A value transformer to convert temperatures from Fahrenheit to
- * Centigrade and to do the reverse.
+ * A <code>Double</code> value transformer to convert temperatures
+ * from Fahrenheit to Centigrade and to do the reverse.
+ *
+ * @author Jason J.A. Stephenson
+ * @version 2.0
  */
 
-public class FahrenheitToCentigradeValueTransformer extends NumberToDoubleValueTransformer {
+public class FahrenheitToCentigradeValueTransformer extends ValueTransformer<Double> {
 
   /**
    * {@inheritDoc}
    *
    * @return always returns <code>true</code>
    */
+  @Override
   public boolean allowsReverseTransformation() { return true; }
 
   /**
-   * Transforms a number with an assumed value of degrees Fahrenheit
-   * into a double with a value in degrees Centrigrade.
+   * Transforms a <code>Double</code> with an assumed value of degrees
+   * Fahrenheit into a <code>Double</code> with a value in degrees
+   * Centrigrade.
    *
-   * @param o {@inheritDoc}
+   * @param f {@inheritDoc}
    * @return {@inheritDoc}
-   * @throws IllegalArgumentException {@inheritDoc}
    */
-  public Object transformedValue(Object o) {
-    if (o instanceof Number) {
-      Number f = (Number) o;
-      double c = (f.doubleValue() - 32.0) * 5.0 / 9.0;
-      return new Double(c);
-    }
-    else throwIllegalArgumentException("transformedValue");
-    return null;
+  @Override
+  public Double transformValue(Double f) {
+    double c = (f.doubleValue() - 32.0) * 5.0 / 9.0;
+    return new Double(c);
   }
 
   /**
-   * Transforms a number with an assumed value of degrees Centigrade
-   * into a double with a value in degrees Fahrenheit.
+   * Transforms a <code>Double</code> with an assumed value of degrees
+   * Centigrade into a <code>Double</code> with a value in degrees
+   * Fahrenheit.
    *
-   * @param o <code>java.lang.Number</code> with value to be
-   * transformed
-   * @return <code>java.lang.Double</code> with the transformed
-   * value of o
-   * @throws IllegalArgumentException if o is not an instance of
-   * <code>java.lang.Number</code>
+   * @param c <code>Double</code> with value to be transformed
+   * @return <code>Double</code> with the transformed value of c
    */
-  public Object reverseTransformedValue(Object o) {
-    if (o instanceof Number) {
-      Number c = (Number) o;
-      double f = c.doubleValue() * 9.0 / 5.0 + 32.0;
-      return new Double(f);
-    }
-    else throwIllegalArgumentException("reverseTransformedValue");
-    return null;
+  @Override
+  public Double reverseTransformValue(Double c) {
+    double f = c.doubleValue() * 9.0 / 5.0 + 32.0;
+    return new Double(f);
   }
 
 }

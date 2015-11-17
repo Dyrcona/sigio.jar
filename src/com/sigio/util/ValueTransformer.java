@@ -1,5 +1,5 @@
 /*
- * Copyright © 2011 Jason J.A. Stephenson
+ * Copyright © 2015 Jason J.A. Stephenson
  * 
  * This file is part of sigio.jar.
  * 
@@ -24,19 +24,19 @@ import java.util.ResourceBundle;
  * Abstract class to provide a base for other value transformer
  * implementations.
  *
- * <p>A value transformer is a class that can take an instance of an
- * object and creates a new object with the paramater object's value
- * transformed in some way from the original. An example of this might
- * be a class to convert temperatures from Fahrenheit to
+ * <p>A value transformer is an that takes an instance of some object
+ * and returns a new object of the same class with the input object's
+ * value transformed in some way from the original. An example of this
+ * might be a class to convert temperatures from Fahrenheit to
  * Centigrade.</p>
  *
- * <p>The concept of this class was basically swiped from OpenStep's
- * NSValueTransformer.</p>
+ * @author Jason J.A. Stephenson
+ * @version 2.0
  */
-public abstract class ValueTransformer {
+public abstract class ValueTransformer<T> {
 
   /**
-   * Check if the instance can do a reverse transformation. The
+   * Returns true if the instance can do a reverse transformation. The
    * inherited implementation always returns <code>false</code>.
    *
    * @return <code>true</code> if a reverse transformation is
@@ -45,17 +45,22 @@ public abstract class ValueTransformer {
   public boolean allowsReverseTransformation() { return false; }
 
   /**
-   * Perform a reverse transformation. The inherited implementation
-   * always throws an UnsupportedOperationException.
+   * Performs a reverse transformation. The inherited implementation
+   * always throws an <code>UnsupportedOperationException</code>
+   * unless the child class overrides
+   * <code>allowsReverseTransformation</code> to return
+   * <code>true</code>. If such a child does not also override
+   * <code>reverseTransformValue</code>, the default performs
+   * <code>transformValue</code>.
    *
    * @param o the instance object to reverse transform
    * @return new object with the transformed value
    * @throws UnsupportedOperationException when a reverse
    * transformation is not supported
    */
-  public Object reverseTransformedValue(Object o) {
+  public T reverseTransformValue(T o) {
     if (this.allowsReverseTransformation())
-      return this.transformedValue(o);
+      return this.transformValue(o);
     else {
       UnsupportedOperationException ex;
       String exceptionFormat;
@@ -74,35 +79,11 @@ public abstract class ValueTransformer {
   }
 
   /**
-   * Transform an object's value. It may throw a RuntimeException or
-   * one of its subclasses if certain implementation specific
-   * details are not met. This is, however, at the discretion of the
-   * subclass implementations.
-   *
-   * <p>At a minimum, implementations should throw an
-   * IllegalArgumentException if the parameter object is not an
-   * instance of the class returned by
-   * <code>transformedValueParamClass()</code>.</p>
+   * Transforms an object's value.
    *
    * @param o object whose value is to be transformed
    * @return new object with the transformed value
    */
-  public abstract Object transformedValue(Object o);
+  public abstract T transformValue(T o);
 
-  /**
-   * Get the class of the object returned by the transformation methods.
-   *
-   * @return class of the objects returned by transformedValue and
-   * reverseTransformedValue
-   */
-  public abstract Class<?> transformedValueReturnClass();
-
-  /**
-   * Get the class (or one of its subclasses) required as the
-   * parameter to the transformation methods.
-   *
-   * @return class of the objects accepted as parameters by
-   * transformedValue and reverseTransformedValue
-   */
-  public abstract Class<?> transformedValueParamClass();
 }
