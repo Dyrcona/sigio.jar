@@ -24,11 +24,11 @@ import java.util.ResourceBundle;
  * Abstract class to provide a base for other value transformer
  * implementations.
  *
- * <p>A value transformer is an that takes an instance of some object
- * and returns a new object of the same class with the input object's
- * value transformed in some way from the original. An example of this
- * might be a class to convert temperatures from Fahrenheit to
- * Centigrade.</p>
+ * <p>A value transformer is an object that takes an instance of some
+ * object and returns a new object of the same class with the input
+ * object's value transformed in some way from the original. An
+ * example of this might be a class to convert temperatures from
+ * Fahrenheit to Centigrade.</p>
  *
  * @author Jason J.A. Stephenson
  * @version 2.0
