@@ -27,6 +27,9 @@ package com.sigio.util;
  */
 public class YardToMeterValueTransformer extends ValueTransformer<Double> {
 
+  // Conversion factor for yards to meters.
+  private static final double CONVERSION_FACTOR = 1.0936;
+
   /**
    * {@inheritDoc}
    *
@@ -45,7 +48,7 @@ public class YardToMeterValueTransformer extends ValueTransformer<Double> {
    */
   @Override
   public Double transformValue(Double y) {
-    double m = y.doubleValue() / 1.0936;
+    double m = y.doubleValue() / CONVERSION_FACTOR;
     return new Double(m);
   }
 
@@ -59,7 +62,7 @@ public class YardToMeterValueTransformer extends ValueTransformer<Double> {
    */
   @Override
   public Double reverseTransformValue(Double m) {
-    double y = m.doubleValue() * 1.0936;
+    double y = m.doubleValue() * CONVERSION_FACTOR;
     return new Double(y);
   }
 
