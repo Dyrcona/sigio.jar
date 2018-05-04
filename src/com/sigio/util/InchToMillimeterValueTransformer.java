@@ -28,6 +28,9 @@ package com.sigio.util;
 
 public class InchToMillimeterValueTransformer extends ValueTransformer<Double> {
 
+  // Conversion factor: number of millimeters in an inch.
+  private static final double CONVERSION_FACTOR = 25.4;
+
   /**
    * {@inheritDoc}
    *
@@ -46,7 +49,7 @@ public class InchToMillimeterValueTransformer extends ValueTransformer<Double> {
    */
   @Override
   public Double transformValue(Double i) {
-    double mm = i.doubleValue() * 25.4;
+    double mm = i.doubleValue() * CONVERSION_FACTOR;
     return new Double(mm);
   }
 
@@ -59,7 +62,7 @@ public class InchToMillimeterValueTransformer extends ValueTransformer<Double> {
    */
   @Override
   public Double reverseTransformValue(Double mm) {
-    double i = mm.doubleValue() / 25.4;
+    double i = mm.doubleValue() / CONVERSION_FACTOR;
     return new Double(i);
   }
 
