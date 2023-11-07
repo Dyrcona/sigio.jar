@@ -1,4 +1,4 @@
-# Copyright © 2011,2015 Jason J.A. Stephenson
+# Copyright © 2011,2015,2023 Jason J.A. Stephenson
 #
 # This file is part of sigio.jar.
 #
@@ -24,6 +24,11 @@ DOC_DIR ?= doc/
 
 SOURCES = src/com/sigio/io/FilenamePatternFilter.java \
           src/com/sigio/io/FilenameExtensionFilter.java \
+          src/com/sigio/io/Logger.java \
+          src/com/sigio/io/StreamLogger.java \
+          src/com/sigio/sql/Connector.java \
+          src/com/sigio/sql/PsqlHandlerTask.java \
+          src/com/sigio/sql/PsqlRunnerAdapter.java \
           src/com/sigio/sql/ResultSetTableModel.java \
           src/com/sigio/sql/DbPropertiesFileFilter.java \
           src/com/sigio/util/ValueTransformer.java \
@@ -53,6 +58,7 @@ DOC_SOURCES = $(SOURCES) \
 
 RESOURCES = src/com/sigio/games/dice/Die.properties \
           src/com/sigio/games/dice/DoublingDie.properties \
+          src/com/sigio/io/Logger_en_US.properties \
           src/com/sigio/json/JSON.properties \
           src/com/sigio/util/ValueTransformer.properties
 
