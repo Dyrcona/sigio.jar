@@ -58,7 +58,7 @@ DOC_SOURCES = $(SOURCES) \
 
 RESOURCES = src/com/sigio/games/dice/Die.properties \
           src/com/sigio/games/dice/DoublingDie.properties \
-          src/com/sigio/io/Logger_en_US.properties \
+          src/com/sigio/io/Logger.properties \
           src/com/sigio/json/JSON.properties \
           src/com/sigio/util/ValueTransformer.properties
 
